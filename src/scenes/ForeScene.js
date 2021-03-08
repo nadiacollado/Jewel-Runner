@@ -1,21 +1,15 @@
-let player
-let cursors
-let score = 0
-let scoreText
+let player, cursors
+let score = 0,
+  scoreText
 let text
 let timedEvent
-let gameOver = false
-let gameOverText
-let youWon = false
-let youWonText
+let gameOver = false,
+  gameOverText
+let youWon = false,
+  youWonText
 let scoreKeeper
-let greenjewels
-let purplejewels
-let pinkjewels
-let bluejewels
-let redhearts
-let blackstars
-let pop
+let greenjewels, purplejewels, pinkjewels, bluejewels, redhearts, blackstars
+let pop, ping, death, hit
 
 class ForeScene extends Phaser.Scene {
   constructor() {
@@ -32,6 +26,9 @@ class ForeScene extends Phaser.Scene {
     this.load.image('pinkjewel', '../assets/sprites/pinkjewel.png')
     this.load.image('blackstar', '../assets/sprites/blackstar.png')
     this.load.audio('pop', '../assets/audio/pop.ogg')
+    this.load.audio('ping', '../assets/audio/p-ping.mp3')
+    this.load.audio('death', '../assets/audio/player_death.wav')
+    this.load.audio('hit', '../assets/audio/battery.wav')
     this.load.spritesheet('ani', '../assets/spriteSheets/ani_spritesheet.png', {
       frameWidth: 50,
       frameHeight: 141
@@ -41,6 +38,9 @@ class ForeScene extends Phaser.Scene {
   create() {
     this.add.image(500, 300, 'sky')
     pop = this.sound.add('pop', {loop: false})
+    ping = this.sound.add('ping', {loop: false, volume: 0.25})
+    death = this.sound.add('death', {loop: false, volume: 0.25})
+    hit = this.sound.add('hit', {loop: false, volume: 0.25})
     const map = this.make.tilemap({key: 'map'})
     const tileset = map.addTilesetImage('simple_platformer', 'tiles')
     const platforms = map.createStaticLayer('platforms', tileset, -64, -360)
@@ -87,65 +87,65 @@ class ForeScene extends Phaser.Scene {
 
     // JEWELS
 
-    // bluejewels = this.physics.add.group({
-    //   key: 'bluejewel',
-    //   repeat: 1,
-    //   setXY: {
-    //     x: 500,
-    //     y: 5,
-    //     stepX: 180
-    //   }
-    // })
+    bluejewels = this.physics.add.group({
+      key: 'bluejewel',
+      repeat: 1,
+      setXY: {
+        x: 800,
+        y: 5,
+        stepX: 180
+      }
+    })
 
-    // bluejewels.children.iterate(function(child) {
-    //   child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
-    // })
+    bluejewels.children.iterate(function(child) {
+      child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
+    })
 
-    // greenjewels = this.physics.add.group({
-    //   key: 'greenjewel',
-    //   repeat: 1,
-    //   setXY: {
-    //     x: 500,
-    //     y: 5,
-    //     stepX: 50
-    //   }
-    // })
+    greenjewels = this.physics.add.group({
+      key: 'greenjewel',
+      repeat: 1,
+      setXY: {
+        x: 700,
+        y: 5,
+        stepX: 50
+      }
+    })
 
-    // greenjewels.children.iterate(function(child) {
-    //   child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
-    // })
+    greenjewels.children.iterate(function(child) {
+      child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
+    })
 
-    // // purplejewels = this.physics.add.group({
-    // //   key: 'purplejewel',
-    // //   repeat: 1,
-    // //   setXY: {
-    // //     x: 300,
-    // //     y: 5,
-    // //     stepX: 250
-    // //   }
-    // // })
+    purplejewels = this.physics.add.group({
+      key: 'purplejewel',
+      repeat: 1,
+      setXY: {
+        x: 300,
+        y: 5,
+        stepX: 250
+      }
+    })
 
-    // // purplejewels.children.iterate(function(child) {
-    // //   child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
-    // // })
+    purplejewels.children.iterate(function(child) {
+      child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
+    })
 
-    // pinkjewels = this.physics.add.group({
-    //   key: 'pinkjewel',
-    //   repeat: 1,
-    //   setXY: {
-    //     x: 200,
-    //     y: 5,
-    //     stepX: 210
-    //   }
-    // })
+    pinkjewels = this.physics.add.group({
+      key: 'pinkjewel',
+      repeat: 1,
+      setXY: {
+        x: 200,
+        y: 5,
+        stepX: 210
+      }
+    })
 
-    // pinkjewels.children.iterate(function(child) {
-    //   child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
-    // })
+    pinkjewels.children.iterate(function(child) {
+      child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
+    })
 
     redhearts = this.physics.add.group({
       key: 'redheart',
-      repeat: 10,
+      repeat: 1,
       setXY: {
         x: 100,
         y: 5,
@@ -180,22 +180,22 @@ class ForeScene extends Phaser.Scene {
 
     // COLLIDER
     this.physics.add.collider(player, platforms)
-    // this.physics.add.collider(platforms, greenjewels)
-    // this.physics.add.collider(platforms, bluejewels)
-    // this.physics.add.collider(platforms, purplejewels)
-    // this.physics.add.collider(platforms, pinkjewels)
+    this.physics.add.collider(platforms, greenjewels)
+    this.physics.add.collider(platforms, bluejewels)
+    this.physics.add.collider(platforms, purplejewels)
+    this.physics.add.collider(platforms, pinkjewels)
     this.physics.add.collider(platforms, redhearts)
     this.physics.add.collider(platforms, blackstars)
 
-    // this.physics.add.overlap(player, bluejewels, this.runJewels, null, this)
-    // this.physics.add.overlap(player, greenjewels, this.runJewels, null, this)
-    // this.physics.add.overlap(player, purplejewels, this.runJewels, null, this)
-    // this.physics.add.overlap(player, pinkjewels, this.runJewels, null, this)
+    this.physics.add.overlap(player, bluejewels, this.runJewels, null, this)
+    this.physics.add.overlap(player, greenjewels, this.runJewels, null, this)
+    this.physics.add.overlap(player, purplejewels, this.runJewels, null, this)
+    this.physics.add.overlap(player, pinkjewels, this.runJewels, null, this)
     this.physics.add.overlap(player, redhearts, this.runHearts, null, this)
     this.physics.add.overlap(player, blackstars, this.hitStars, null, this)
 
     // TIMER
-    this.initialTime = 3
+    this.initialTime = 20
 
     text = this.add.text(
       740,
@@ -227,42 +227,33 @@ class ForeScene extends Phaser.Scene {
       player.setVelocityX(0)
       player.anims.play('turn')
     }
-
     if (cursors.up.isDown) {
       player.setVelocityY(-600)
     }
-
-    // let children = redhearts.children.getArray()
-    // // console.log(children)
-    // if (this.initialTime > 0 && children.length < 1) {
-    //   timedEvent.remove()
-    //   this.physics.pause()
-    //   player.anims.play('turn')
-    //   youWon = true
-    //   youWonText = this.add.text(320, 220, 'YOU\n WON', {
-    //     fontFamily: 'Stud',
-    //     fontSize: '100px',
-    //     fill: '#ff0000'
-    //   })
-    // }
   }
 
   runJewels(player, jewel) {
     pop.play()
     jewel.disableBody(true, true)
-    score += 100
-    scoreKeeper.setText(`Score: ${score}`)
-  }
-
-  runHearts(player, heart) {
-    pop.play()
-    heart.disableBody(true, true)
-    score += 500
-    // player.setScale(1.5)
+    score += 10
     scoreKeeper.setText(`Score: ${score}`)
 
-    if (redhearts.countActive(true) === 0) {
-      redhearts.children.iterate(function(child) {
+    if (
+      bluejewels.countActive(true) === 0 &&
+      greenjewels.countActive(true) === 0 &&
+      pinkjewels.countActive(true) === 0 &&
+      purplejewels.countActive(true) === 0
+    ) {
+      bluejewels.children.iterate(function(child) {
+        child.enableBody(true, child.x, 0, true, true)
+      })
+      greenjewels.children.iterate(function(child) {
+        child.enableBody(true, child.x, 0, true, true)
+      })
+      pinkjewels.children.iterate(function(child) {
+        child.enableBody(true, child.x, 0, true, true)
+      })
+      purplejewels.children.iterate(function(child) {
         child.enableBody(true, child.x, 0, true, true)
       })
 
@@ -278,11 +269,39 @@ class ForeScene extends Phaser.Scene {
     }
   }
 
+  runHearts(player, heart) {
+    ping.play()
+    heart.disableBody(true, true)
+    score += 20
+    scoreKeeper.setText(`Score: ${score}`)
+
+    if (redhearts.countActive(true) === 0) {
+      redhearts.children.iterate(function(child) {
+        let x =
+          child.x < 400
+            ? Phaser.Math.Between(400, 800)
+            : Phaser.Math.Between(0, 400)
+
+        child.enableBody(true, x, 0, true, true)
+      })
+
+      let x =
+        player.x < 400
+          ? Phaser.Math.Between(400, 800)
+          : Phaser.Math.Between(0, 400)
+
+      let star = blackstars.create(x, 16, 'blackstar')
+      star.setBounce(1)
+      star.setCollideWorldBounds(true)
+      star.setVelocity(Phaser.Math.Between(-200, 200), 20)
+    }
+  }
+
   hitStars(player, star) {
-    // pop.play()
+    hit.play()
     star.disableBody(true, true)
     player.setScale(1)
-    score -= 500
+    score -= 20
     scoreKeeper.setText(`Score: ${score}`)
     this.onEvent()
   }
@@ -299,6 +318,7 @@ class ForeScene extends Phaser.Scene {
     text.setText('Countdown: ' + this.formatTime(this.initialTime))
 
     if (score < 0) {
+      death.play()
       timedEvent.remove()
       this.physics.pause()
       player.anims.play('turn')
