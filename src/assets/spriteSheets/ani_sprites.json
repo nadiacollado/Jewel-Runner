@@ -1,0 +1,126 @@
+{
+  "textures": [
+    {
+      "image": "ani_sprites.png",
+      "format": "RGBA8888",
+      "size": {
+        "w": 52,
+        "h": 683
+      },
+      "scale": 1,
+      "frames": [
+        {
+          "filename": "3.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 50,
+            "h": 139
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 50,
+            "h": 139
+          },
+          "frame": {
+            "x": 1,
+            "y": 1,
+            "w": 50,
+            "h": 139
+          }
+        },
+        {
+          "filename": "5.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 50,
+            "h": 139
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 50,
+            "h": 139
+          },
+          "frame": {
+            "x": 1,
+            "y": 142,
+            "w": 50,
+            "h": 139
+          }
+        },
+        {
+          "filename": "1.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 50,
+            "h": 137
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 50,
+            "h": 137
+          },
+          "frame": {
+            "x": 1,
+            "y": 283,
+            "w": 50,
+            "h": 137
+          }
+        },
+        {
+          "filename": "2.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 50,
+            "h": 129
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 50,
+            "h": 129
+          },
+          "frame": {
+            "x": 1,
+            "y": 422,
+            "w": 50,
+            "h": 129
+          }
+        },
+        {
+          "filename": "4.png",
+          "rotated": false,
+          "trimmed": false,
+          "sourceSize": {
+            "w": 50,
+            "h": 129
+          },
+          "spriteSourceSize": {
+            "x": 0,
+            "y": 0,
+            "w": 50,
+            "h": 129
+          },
+          "frame": {
+            "x": 1,
+            "y": 553,
+            "w": 50,
+            "h": 129
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "3.0",
+    "smartupdate":
+      "$TexturePacker:SmartUpdate:328beacb2cceed268d86f41fccf2216b:6683d3bda0227d5c29980ae867085592:2866b32d45875425aa95dcbb00925321$"
+  }
+}
