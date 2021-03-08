@@ -25,7 +25,7 @@ class TitleScene extends Phaser.Scene {
     let instructions = this.add.text(
       280,
       300,
-      'Collect as many jewels as you can \n  before time runs out! Watch out \n for hearts which give 5x as many \n    points and ~~special powers~~',
+      'Collect as many jewels as you can \n   before time runs out! Pick up \n   hearts for 2x as many points\n and watch out for death stars!',
       {
         fontFamily: 'Tomarik Display',
         fontSize: '23px',
