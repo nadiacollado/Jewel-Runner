@@ -1,6 +1,7 @@
 let player
 let cursors
 let score = 0
+let scoreText
 let text
 let timedEvent
 let gameOver = false
@@ -144,7 +145,7 @@ class ForeScene extends Phaser.Scene {
 
     redhearts = this.physics.add.group({
       key: 'redheart',
-      repeat: 2,
+      repeat: 10,
       setXY: {
         x: 100,
         y: 5,
@@ -153,7 +154,7 @@ class ForeScene extends Phaser.Scene {
     })
 
     redhearts.children.iterate(function(child) {
-      child.setBounceY(Phaser.Math.FloatBetween(0.5, 1.25))
+      child.setBounceY(Phaser.Math.FloatBetween(0.5, 0.9))
     })
 
     blackstars = this.physics.add.group({
@@ -191,10 +192,10 @@ class ForeScene extends Phaser.Scene {
     // this.physics.add.overlap(player, purplejewels, this.runJewels, null, this)
     // this.physics.add.overlap(player, pinkjewels, this.runJewels, null, this)
     this.physics.add.overlap(player, redhearts, this.runHearts, null, this)
-    this.physics.add.overlap(player, blackstars, this.runStars, null, this)
+    this.physics.add.overlap(player, blackstars, this.hitStars, null, this)
 
     // TIMER
-    this.initialTime = 15
+    this.initialTime = 3
 
     text = this.add.text(
       740,
@@ -231,19 +232,19 @@ class ForeScene extends Phaser.Scene {
       player.setVelocityY(-600)
     }
 
-    let children = redhearts.children.getArray()
-    // console.log(children)
-    if (this.initialTime > 0 && children.length < 1) {
-      timedEvent.remove()
-      this.physics.pause()
-      player.anims.play('turn')
-      youWon = true
-      youWonText = this.add.text(320, 220, 'YOU\n WON', {
-        fontFamily: 'Stud',
-        fontSize: '100px',
-        fill: '#ff0000'
-      })
-    }
+    // let children = redhearts.children.getArray()
+    // // console.log(children)
+    // if (this.initialTime > 0 && children.length < 1) {
+    //   timedEvent.remove()
+    //   this.physics.pause()
+    //   player.anims.play('turn')
+    //   youWon = true
+    //   youWonText = this.add.text(320, 220, 'YOU\n WON', {
+    //     fontFamily: 'Stud',
+    //     fontSize: '100px',
+    //     fill: '#ff0000'
+    //   })
+    // }
   }
 
   runJewels(player, jewel) {
@@ -257,16 +258,33 @@ class ForeScene extends Phaser.Scene {
     pop.play()
     heart.disableBody(true, true)
     score += 500
-    player.setScale(1.5)
+    // player.setScale(1.5)
     scoreKeeper.setText(`Score: ${score}`)
+
+    if (redhearts.countActive(true) === 0) {
+      redhearts.children.iterate(function(child) {
+        child.enableBody(true, child.x, 0, true, true)
+      })
+
+      let x =
+        player.x < 400
+          ? Phaser.Math.Between(400, 800)
+          : Phaser.Math.Between(0, 400)
+
+      let star = blackstars.create(x, 16, 'blackstar')
+      star.setBounce(1)
+      star.setCollideWorldBounds(true)
+      star.setVelocity(Phaser.Math.Between(-200, 200), 20)
+    }
   }
 
-  runStars(player, star) {
-    pop.play()
+  hitStars(player, star) {
+    // pop.play()
     star.disableBody(true, true)
-    score -= 100
     player.setScale(1)
+    score -= 500
     scoreKeeper.setText(`Score: ${score}`)
+    this.onEvent()
   }
 
   formatTime(seconds) {
@@ -280,7 +298,7 @@ class ForeScene extends Phaser.Scene {
     this.initialTime -= 1 // One second
     text.setText('Countdown: ' + this.formatTime(this.initialTime))
 
-    if (this.initialTime === 0) {
+    if (score < 0) {
       timedEvent.remove()
       this.physics.pause()
       player.anims.play('turn')
@@ -289,6 +307,25 @@ class ForeScene extends Phaser.Scene {
         fontFamily: 'Stud',
         fontSize: '50px',
         fill: '#ff0000'
+      })
+    }
+    // const screenCenterX = this.game.config.width / 2;
+    // const screenCenterY = this.game.config.height / 2;
+
+    if (this.initialTime === 0) {
+      timedEvent.remove()
+      this.physics.pause()
+      player.anims.play('turn')
+      youWon = true
+      youWonText = this.add.text(275, 195, 'HI SCORE', {
+        fontFamily: 'Stud',
+        fontSize: '50px',
+        fill: '#FF33F0'
+      })
+      scoreText = this.add.text(420, 250, `${score}`, {
+        fontFamily: 'Stud',
+        fontSize: '60px',
+        fill: '#FF33F0'
       })
     }
   }
