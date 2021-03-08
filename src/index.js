@@ -11,8 +11,8 @@ const canvas = document.getElementById('game-canvas')
 
 const config = {
   type: Phaser.WEB_GL,
-  width: 1300,
-  height: 800,
+  width: 1000,
+  height: 600,
   autoCenter: true,
   canvas,
   physics: {

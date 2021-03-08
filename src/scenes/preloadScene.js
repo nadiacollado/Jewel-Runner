@@ -6,8 +6,8 @@ class PreloadScene extends Phaser.Scene {
   preload(value) {
     this.graphics = this.add.graphics()
     this.newGraphics = this.add.graphics()
-    let progressBar = new Phaser.Geom.Rectangle(400, 370, 500, 50)
-    let progressBarFill = new Phaser.Geom.Rectangle(400, 370, 300 * value, 50)
+    let progressBar = new Phaser.Geom.Rectangle(300, 280, 400, 40)
+    let progressBarFill = new Phaser.Geom.Rectangle(300, 280, 200 * value, 40)
 
     this.graphics.fillStyle(0xffffff, 1)
     this.graphics.fillRectShape(progressBar)
@@ -15,7 +15,7 @@ class PreloadScene extends Phaser.Scene {
     this.newGraphics.fillStyle(0x3587e2, 1)
     this.newGraphics.fillRectShape(progressBarFill)
 
-    let loadingText = this.add.text(530, 280, 'Loading: ', {
+    let loadingText = this.add.text(385, 230, 'Loading: ', {
       fontFamily: 'Tomarik Display',
       fontSize: '32px',
       fill: '#FFF'
@@ -40,7 +40,7 @@ class PreloadScene extends Phaser.Scene {
     this.newGraphics.clear()
     this.newGraphics.fillStyle(0x3587e2, 1)
     this.newGraphics.fillRectShape(
-      new Phaser.Geom.Rectangle(400, 370, 300 * value, 50)
+      new Phaser.Geom.Rectangle(300, 280, 200 * value, 40)
     )
     this.loadingText.setText('Loading: ' + parseInt(value * 100) + '%')
   }
