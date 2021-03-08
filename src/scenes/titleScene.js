@@ -11,8 +11,8 @@ class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    let sky = this.add.image(700, 450, 'sky')
-    this.add.image(700, 700, 'bluejewel').setScale(3)
+    let sky = this.add.image(500, 300, 'sky')
+    this.add.image(800, 400, 'bluejewel').setScale(3)
     this.add.image(90, 205, 'greenjewel').setScale(3)
     this.add.image(900, 90, 'purplejewel').setScale(3)
 

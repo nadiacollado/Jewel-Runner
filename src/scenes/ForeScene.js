@@ -38,13 +38,13 @@ class ForeScene extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(700, 450, 'sky')
+    this.add.image(500, 300, 'sky')
     pop = this.sound.add('pop', {loop: false})
     const map = this.make.tilemap({key: 'map'})
     const tileset = map.addTilesetImage('simple_platformer', 'tiles')
-    const platforms = map.createStaticLayer('platforms', tileset, 0, -160)
+    const platforms = map.createStaticLayer('platforms', tileset, -64, -360)
 
-    player = this.physics.add.sprite(100, 450, 'ani').setScale(1.5)
+    player = this.physics.add.sprite(100, 450, 'ani')
 
     player.setBounce(0.2)
     player.setCollideWorldBounds(true)
@@ -86,69 +86,69 @@ class ForeScene extends Phaser.Scene {
 
     // JEWELS
 
-    bluejewels = this.physics.add.group({
-      key: 'bluejewel',
-      repeat: 1,
-      setXY: {
-        x: 50,
-        y: 5,
-        stepX: 220
-      }
-    })
+    // bluejewels = this.physics.add.group({
+    //   key: 'bluejewel',
+    //   repeat: 1,
+    //   setXY: {
+    //     x: 500,
+    //     y: 5,
+    //     stepX: 180
+    //   }
+    // })
 
-    bluejewels.children.iterate(function(child) {
-      child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
-    })
+    // bluejewels.children.iterate(function(child) {
+    //   child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
+    // })
 
-    greenjewels = this.physics.add.group({
-      key: 'greenjewel',
-      repeat: 1,
-      setXY: {
-        x: 60,
-        y: 5,
-        stepX: 225
-      }
-    })
+    // greenjewels = this.physics.add.group({
+    //   key: 'greenjewel',
+    //   repeat: 1,
+    //   setXY: {
+    //     x: 500,
+    //     y: 5,
+    //     stepX: 50
+    //   }
+    // })
 
-    greenjewels.children.iterate(function(child) {
-      child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
-    })
+    // greenjewels.children.iterate(function(child) {
+    //   child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
+    // })
 
-    purplejewels = this.physics.add.group({
-      key: 'purplejewel',
-      repeat: 1,
-      setXY: {
-        x: 30,
-        y: 5,
-        stepX: 250
-      }
-    })
+    // // purplejewels = this.physics.add.group({
+    // //   key: 'purplejewel',
+    // //   repeat: 1,
+    // //   setXY: {
+    // //     x: 300,
+    // //     y: 5,
+    // //     stepX: 250
+    // //   }
+    // // })
 
-    purplejewels.children.iterate(function(child) {
-      child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
-    })
+    // // purplejewels.children.iterate(function(child) {
+    // //   child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
+    // // })
 
-    pinkjewels = this.physics.add.group({
-      key: 'pinkjewel',
-      repeat: 1,
-      setXY: {
-        x: 20,
-        y: 5,
-        stepX: 210
-      }
-    })
+    // pinkjewels = this.physics.add.group({
+    //   key: 'pinkjewel',
+    //   repeat: 1,
+    //   setXY: {
+    //     x: 200,
+    //     y: 5,
+    //     stepX: 210
+    //   }
+    // })
 
-    pinkjewels.children.iterate(function(child) {
-      child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
-    })
+    // pinkjewels.children.iterate(function(child) {
+    //   child.setBounceY(Phaser.Math.FloatBetween(0.5, 1))
+    // })
 
     redhearts = this.physics.add.group({
       key: 'redheart',
       repeat: 2,
       setXY: {
-        x: 20,
+        x: 100,
         y: 5,
-        stepX: 550
+        stepX: 70
       }
     })
 
@@ -160,9 +160,9 @@ class ForeScene extends Phaser.Scene {
       key: 'blackstar',
       repeat: 2,
       setXY: {
-        x: 20,
+        x: 300,
         y: 5,
-        stepX: 580
+        stepX: 80
       }
     })
 
@@ -173,36 +173,36 @@ class ForeScene extends Phaser.Scene {
     // SCORE
     scoreKeeper = this.add.text(16, 16, 'score: 0', {
       fontFamily: 'Tomarik Display',
-      fontSize: '32px',
+      fontSize: '23px',
       fill: '#000000'
     })
 
     // COLLIDER
     this.physics.add.collider(player, platforms)
-    this.physics.add.collider(platforms, greenjewels)
-    this.physics.add.collider(platforms, bluejewels)
-    this.physics.add.collider(platforms, purplejewels)
-    this.physics.add.collider(platforms, pinkjewels)
+    // this.physics.add.collider(platforms, greenjewels)
+    // this.physics.add.collider(platforms, bluejewels)
+    // this.physics.add.collider(platforms, purplejewels)
+    // this.physics.add.collider(platforms, pinkjewels)
     this.physics.add.collider(platforms, redhearts)
     this.physics.add.collider(platforms, blackstars)
 
-    this.physics.add.overlap(player, bluejewels, this.runJewels, null, this)
-    this.physics.add.overlap(player, greenjewels, this.runJewels, null, this)
-    this.physics.add.overlap(player, purplejewels, this.runJewels, null, this)
-    this.physics.add.overlap(player, pinkjewels, this.runJewels, null, this)
+    // this.physics.add.overlap(player, bluejewels, this.runJewels, null, this)
+    // this.physics.add.overlap(player, greenjewels, this.runJewels, null, this)
+    // this.physics.add.overlap(player, purplejewels, this.runJewels, null, this)
+    // this.physics.add.overlap(player, pinkjewels, this.runJewels, null, this)
     this.physics.add.overlap(player, redhearts, this.runHearts, null, this)
     this.physics.add.overlap(player, blackstars, this.runStars, null, this)
 
     // TIMER
-    this.initialTime = 60
+    this.initialTime = 15
 
     text = this.add.text(
-      940,
+      740,
       16,
       'Countdown: ' + this.formatTime(this.initialTime),
       {
         fontFamily: 'Tomarik Display',
-        fontSize: '32px',
+        fontSize: '23px',
         fill: '#000000'
       }
     )
@@ -230,6 +230,20 @@ class ForeScene extends Phaser.Scene {
     if (cursors.up.isDown) {
       player.setVelocityY(-600)
     }
+
+    let children = redhearts.children.getArray()
+    // console.log(children)
+    if (this.initialTime > 0 && children.length < 1) {
+      timedEvent.remove()
+      this.physics.pause()
+      player.anims.play('turn')
+      youWon = true
+      youWonText = this.add.text(320, 220, 'YOU\n WON', {
+        fontFamily: 'Stud',
+        fontSize: '100px',
+        fill: '#ff0000'
+      })
+    }
   }
 
   runJewels(player, jewel) {
@@ -243,7 +257,7 @@ class ForeScene extends Phaser.Scene {
     pop.play()
     heart.disableBody(true, true)
     score += 500
-    player.setScale(2)
+    player.setScale(1.5)
     scoreKeeper.setText(`Score: ${score}`)
   }
 
@@ -266,17 +280,6 @@ class ForeScene extends Phaser.Scene {
     this.initialTime -= 1 // One second
     text.setText('Countdown: ' + this.formatTime(this.initialTime))
 
-    // if (this.initialTime !== 0 && this.redHearts < 1) {
-    //   timedEvent.remove()
-    //   player.anims.play('turn');
-    //   youWon = true
-    //   youWonText = this.add.text(320, 220, 'YOU\n WON', {
-    //     fontFamily: 'Stud',
-    //     fontSize: '100px',
-    //     fill: '#ff0000'
-    //   })
-    // }
-
     if (this.initialTime === 0) {
       timedEvent.remove()
       this.physics.pause()
@@ -284,7 +287,7 @@ class ForeScene extends Phaser.Scene {
       gameOver = true
       gameOverText = this.add.text(320, 220, 'GAME\n OVER', {
         fontFamily: 'Stud',
-        fontSize: '100px',
+        fontSize: '50px',
         fill: '#ff0000'
       })
     }
