@@ -3,6 +3,8 @@
   padding: 0;
   outline: none;
   text-decoration: none;
+  font-family: 'Courier New';
+  font-weight: 700;
 }
 
 @font-face {

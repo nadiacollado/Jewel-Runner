@@ -195,7 +195,7 @@ class ForeScene extends Phaser.Scene {
     this.physics.add.overlap(player, blackstars, this.hitStars, null, this)
 
     // TIMER
-    this.initialTime = 20
+    this.initialTime = 5
 
     text = this.add.text(
       740,
@@ -323,28 +323,26 @@ class ForeScene extends Phaser.Scene {
       this.physics.pause()
       player.anims.play('turn')
       gameOver = true
-      gameOverText = this.add.text(320, 220, 'GAME\n OVER', {
-        fontFamily: 'Stud',
-        fontSize: '50px',
+      gameOverText = this.add.text(385, 165, 'GAME\nOVER', {
+        fontFamily: 'Verdana',
+        fontSize: '90px',
         fill: '#ff0000'
       })
     }
-    // const screenCenterX = this.game.config.width / 2;
-    // const screenCenterY = this.game.config.height / 2;
 
     if (this.initialTime === 0) {
       timedEvent.remove()
       this.physics.pause()
       player.anims.play('turn')
       youWon = true
-      youWonText = this.add.text(275, 195, 'HI SCORE', {
-        fontFamily: 'Stud',
-        fontSize: '50px',
+      youWonText = this.add.text(320, 185, 'HI SCORE', {
+        fontFamily: 'Verdana',
+        fontSize: '80px',
         fill: '#FF33F0'
       })
-      scoreText = this.add.text(420, 250, `${score}`, {
-        fontFamily: 'Stud',
-        fontSize: '60px',
+      scoreText = this.add.text(460, 270, `${score}`, {
+        fontFamily: 'Verdana',
+        fontSize: '80px',
         fill: '#FF33F0'
       })
     }

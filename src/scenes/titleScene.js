@@ -16,11 +16,14 @@ class TitleScene extends Phaser.Scene {
     this.add.image(90, 205, 'greenjewel').setScale(3)
     this.add.image(900, 90, 'purplejewel').setScale(3)
 
-    let welcome = this.add.text(110, 120, '     Welcome to \nJEWEL-RUNNER!', {
-      fontFamily: 'Hoosier Daddy',
-      fontSize: '60px',
-      fill: '#ff40fc'
-    })
+    let style = {font: '70px Verdana', fill: '#ff40fc', align: 'center'}
+
+    let welcome = this.add.text(
+      110,
+      95,
+      '     Welcome to \n    JEWEL-RUNNER!',
+      style
+    )
 
     let instructions = this.add.text(
       280,
