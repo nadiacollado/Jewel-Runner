@@ -19,21 +19,3 @@
   font-family: 'Hoosier Daddy';
   src: url('./assets/fonts/hoosier.otf') format('opentype');
 }
-
-a {
-  text-decoration: none;
-}
-
-label {
-  display: block;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
-form div {
-  margin: 1em;
-  display: inline-block;
-}
