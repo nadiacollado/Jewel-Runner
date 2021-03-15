@@ -4,10 +4,15 @@ class PreloadScene extends Phaser.Scene {
   }
 
   preload(value) {
-    this.graphics = this.add.graphics()
-    this.newGraphics = this.add.graphics()
+    this.load.image('sky', '../assets/backgrounds/sky.png')
+    for (let i = 0; i < 500; i++) {
+      this.load.image('sky' + i, '../assets/backgrounds/sky.png')
+    }
     let progressBar = new Phaser.Geom.Rectangle(300, 280, 400, 40)
     let progressBarFill = new Phaser.Geom.Rectangle(300, 280, 200 * value, 40)
+
+    this.graphics = this.add.graphics()
+    this.newGraphics = this.add.graphics()
 
     this.graphics.fillStyle(0xffffff, 1)
     this.graphics.fillRectShape(progressBar)
@@ -21,11 +26,6 @@ class PreloadScene extends Phaser.Scene {
       fill: '#FFF'
     })
 
-    this.load.image('sky', '../assets/backgrounds/sky.png')
-    for (let i = 0; i < 500; i++) {
-      this.load.image('sky' + i, '../assets/backgrounds/sky.png')
-    }
-
     this.load.on('progress', this.updateBar, {
       newGraphics: this.newGraphics,
       loadingText: loadingText
@@ -34,6 +34,11 @@ class PreloadScene extends Phaser.Scene {
     this.load.on('complete', this.complete, {
       scene: this.scene
     })
+
+    this.load.image('sky', '../assets/backgrounds/sky.png')
+    for (let i = 0; i < 500; i++) {
+      this.load.image('sky' + i, '../assets/backgrounds/sky.png')
+    }
   }
 
   updateBar(value) {
