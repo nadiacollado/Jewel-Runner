@@ -5,6 +5,21 @@
   text-decoration: none;
 }
 
+@font-face {
+  font-family: 'Stud';
+  src: url('./assets/fonts/stud.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Tomarik Display';
+  src: url('./assets/fonts/tomarik.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Hoosier Daddy';
+  src: url('./assets/fonts/hoosier.otf') format('opentype');
+}
+
 /* body {
   font-family: sans-serif;
 } */
