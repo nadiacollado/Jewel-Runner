@@ -5,6 +5,24 @@
   text-decoration: none;
 }
 
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+nav a {
+  display: inline-block;
+  margin: 1em;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
+
 @font-face {
   font-family: 'Stud';
   src: url('./assets/fonts/stud.otf') format('opentype');

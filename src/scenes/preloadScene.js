@@ -26,20 +26,9 @@ class PreloadScene extends Phaser.Scene {
       fill: '#FFF'
     })
 
-    let hoosier = this.add.text(0, 0, 'mock text', {
-      font: 'Hoosier Dadddy',
-      fill: '#FFF'
-    })
-    hoosier.visible = false
-
-    let stud = this.add.text(0, 0, 'mock text', {font: 'Stud', fill: '#FFFFFF'})
-    stud.visible = false
-
     this.load.on('progress', this.updateBar, {
       newGraphics: this.newGraphics,
-      loadingText: loadingText,
-      hoosier: hoosier,
-      stud: stud
+      loadingText: loadingText
     })
 
     this.load.on('complete', this.complete, {
