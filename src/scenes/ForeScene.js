@@ -195,7 +195,7 @@ class ForeScene extends Phaser.Scene {
     this.physics.add.overlap(player, blackstars, this.hitStars, null, this)
 
     // TIMER
-    this.initialTime = 5
+    this.initialTime = 20
 
     text = this.add.text(
       740,
