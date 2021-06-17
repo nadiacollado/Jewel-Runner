@@ -1,4 +1,4 @@
-##Jewel-Runner
+## Jewel-Runner
 
 Jewel-Runner is a Phaser game where the objective is to collect as many jewels as possible before time runs out.
 
